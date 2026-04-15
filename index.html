@@ -94,7 +94,21 @@
 //          open.er-api.com (todas públicas y gratis)
 // ─────────────────────────────────────────────────────
 
-const PROXY = 'https://api.allorigins.win/raw?url=';
+const PROXIES = [
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://cors-anywhere.herokuapp.com/${url}`
+];
+
+async function fetchProxy(url){
+  for (let p of PROXIES){
+    try{
+      const res = await fetch(p(url));
+      if(res.ok) return res.json();
+    }catch(e){}
+  }
+  throw new Error("Todos los proxies fallaron");
+}
 const PFX = 'ceco2_', IDX = 'ceco2_idx';
 
 // ── CLOCK
@@ -124,21 +138,74 @@ async function fetchJSON(url){
 async function fetchProxy(url){
   return fetchJSON(PROXY + encodeURIComponent(url));
 }
+  // ── CACHE (guardar último dato válido)
+function getCache(key){
+  try{
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  }catch(e){
+    return null;
+  }
+}
+
+function setCache(key,val){
+  try{
+    localStorage.setItem(key, JSON.stringify(val));
+  }catch(e){}
+}
 
 // ──────────────────────────────────────────────
 // 1. DÓLAR · BCRP oficial (estadisticas.bcrp.gob.pe)
 // ──────────────────────────────────────────────
+
 async function getDolarBCRP(){
+  const cacheKey = "dolar";
+
   try{
-    // Series BCRP: PD04640PD=compra, PD04641PD=venta (USD/PEN)
     const url='https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PD04640PD-PD04641PD/json/1/1';
     const d=await fetchProxy(url);
     const p=d?.periods;
+
     if(p && p.length){
       const lat=p[p.length-1];
-      return {compra:parseFloat(lat.values[0]).toFixed(3), venta:parseFloat(lat.values[1]).toFixed(3), fuente:'BCRP oficial'};
+      const result = {
+        compra:parseFloat(lat.values[0]).toFixed(3),
+        venta:parseFloat(lat.values[1]).toFixed(3),
+        fuente:'BCRP oficial'
+      };
+
+      setCache(cacheKey, result); // ✅ guardar
+      return result;
     }
-  }catch(e){console.warn('BCRP series falló',e);}
+  }catch(e){}
+
+  // 🔁 fallback API gratuita
+  try{
+    const d=await fetchJSON('https://open.er-api.com/v6/latest/USD');
+    if(d?.rates?.PEN){
+      const mid=d.rates.PEN;
+
+      const result = {
+        compra:(mid-0.015).toFixed(3),
+        venta:(mid+0.015).toFixed(3),
+        fuente:'ExchangeRate-API'
+      };
+
+      setCache(cacheKey, result); // ✅ guardar
+      return result;
+    }
+  }catch(e){}
+
+  // 🧠 USAR CACHE SI TODO FALLA
+  const cache = getCache(cacheKey);
+  if(cache){
+    return {...cache, fuente: cache.fuente + ' (cache)'};
+  }
+
+  return {compra:'—', venta:'—', fuente:'no disponible'};
+}
+  
+  catch(e){console.warn('BCRP series falló',e);}
   // Fallback: open.er-api (gratuito, sin key)
   try{
     const d=await fetchJSON('https://open.er-api.com/v6/latest/USD');
@@ -178,26 +245,20 @@ function getTasaBCRP(){
 // 4. METALES Y PETRÓLEO · Yahoo Finance (libre, ~15min delay)
 // ──────────────────────────────────────────────
 async function getMetales(){
-  const result={oro:'—',plata:'—',cobre:'—',brent:'—',oro_prev:null,plata_prev:null,cobre_prev:null};
   try{
-    const sym='GC%3DF%2CSI%3DF%2CHG%3DF%2CBZ%3DF'; // GC=F, SI=F, HG=F, BZ=F
-    const url=`https://query1.finance.yahoo.com/v8/finance/spark?symbols=${sym}&range=2d&interval=1d`;
-    const d=await fetchProxy(url);
-    const spark=d?.spark?.result;
-    if(spark){
-      spark.forEach(item=>{
-        const closes=item.response?.[0]?.indicators?.quote?.[0]?.close;
-        if(!closes||!closes.length) return;
-        const last=closes[closes.length-1];
-        const prev=closes.length>1?closes[closes.length-2]:null;
-        if(item.symbol==='GC=F'){result.oro=last.toFixed(0);result.oro_prev=prev?prev.toFixed(0):null;}
-        if(item.symbol==='SI=F'){result.plata=last.toFixed(2);result.plata_prev=prev?prev.toFixed(2):null;}
-        if(item.symbol==='HG=F'){result.cobre=last.toFixed(3);result.cobre_prev=prev?prev.toFixed(3):null;}
-        if(item.symbol==='BZ=F'){result.brent=last.toFixed(2);}
-      });
-    }
-  }catch(e){console.warn('Yahoo metales falló',e);}
-  return result;
+    const d = await fetchJSON("https://api.metals.live/v1/spot");
+    let obj = {};
+    d.forEach(x => obj[x[0]] = x[1]);
+
+    return {
+      oro: obj.gold?.toFixed(0),
+      plata: obj.silver?.toFixed(2),
+      cobre: obj.copper?.toFixed(3),
+      brent: obj.oil?.toFixed(2)
+    };
+  }catch(e){
+    return {oro:'—',plata:'—',cobre:'—',brent:'—'};
+  }
 }
 
 // ──────────────────────────────────────────────
