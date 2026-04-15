@@ -21,22 +21,9 @@
   .hmeta{font-size:11px;color:var(--muted);margin-top:6px;}
   .hbadge{display:inline-block;font-size:9px;font-family:var(--mono);letter-spacing:1px;padding:3px 8px;border-radius:4px;margin-top:8px;}
   .b-live{background:rgba(0,229,160,0.12);color:var(--green);}
-  .b-old{background:rgba(107,125,150,0.15);color:var(--muted);}
-  .navrow{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
-  .nbtn{background:var(--surface);border:0.5px solid var(--border2);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:12px;padding:7px 13px;cursor:pointer;transition:background .15s;}
-  .nbtn:hover:not(:disabled){background:var(--surface2);}
-  .nbtn:disabled{opacity:.3;cursor:default;}
-  .nbtn.ref{background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.3);color:var(--green);margin-left:auto;}
-  .nbtn.ref:hover{background:rgba(0,229,160,0.18);}
-  .ncenter{font-family:var(--mono);font-size:11px;color:var(--muted);}
-  .hrow{display:flex;gap:5px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
-  .hdot{width:9px;height:9px;border-radius:50%;background:var(--surface2);border:0.5px solid var(--border2);cursor:pointer;transition:transform .1s;}
-  .hdot:hover{transform:scale(1.3);}
-  .hdot.today{background:var(--green);border-color:var(--green);}
-  .hdot.past{background:var(--blue);border-color:var(--blue);opacity:.7;}
-  .hlabel{font-size:10px;color:var(--muted);font-family:var(--mono);margin-left:4px;}
   .sec{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
-  .stitle{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:var(--mono);margin-bottom:12px;}
+  .stitle{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:var(--mono);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .src-badge{font-size:8px;letter-spacing:.5px;padding:2px 6px;border-radius:3px;background:rgba(74,158,255,.1);color:var(--blue);border:.5px solid rgba(74,158,255,.2);text-transform:none;letter-spacing:0;}
   .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
   .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;}
@@ -60,7 +47,6 @@
   .flat{color:var(--muted);}
   .tasarow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
   .tasabig{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--blue);}
-  /* BVL TABLE */
   .bvl-table{width:100%;border-collapse:collapse;font-size:12px;}
   .bvl-table th{font-size:9px;font-family:var(--mono);letter-spacing:1px;color:var(--muted);text-transform:uppercase;text-align:left;padding:0 6px 8px;border-bottom:0.5px solid var(--border2);}
   .bvl-table th.r{text-align:right;}
@@ -72,40 +58,23 @@
   .bchg{font-family:var(--mono);font-size:12px;font-weight:700;}
   .bchg.up{color:var(--green);}
   .bchg.dn{color:var(--red);}
-  .bbar-wrap{width:50px;height:4px;background:var(--surface2);border-radius:2px;display:inline-block;vertical-align:middle;margin-left:6px;}
-  .bbar{height:4px;border-radius:2px;}
-  .bvl2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;padding-top:12px;border-top:.5px solid var(--border);}
-  .bvlsig{font-size:22px;font-weight:600;margin:4px 0;}
-  .bvlsig.pos{color:var(--gold);}
-  .bvlsig.caut{color:var(--purple);}
-  .bvldesc{font-size:11px;color:var(--muted);line-height:1.4;}
-  /* FUEL */
   .fuel-wrap{margin-bottom:12px;}
   .fuel-region{font-size:9px;letter-spacing:1.5px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;margin-bottom:10px;padding:3px 8px;background:rgba(255,255,255,.03);border-radius:4px;display:inline-block;}
-  /* POL / IMPACT / ACTION */
-  .polbar{border-left:2px solid var(--orange);padding-left:12px;}
-  .poltitle{font-size:13px;color:var(--orange);font-weight:500;margin-bottom:4px;}
-  .polbody{font-size:12px;color:var(--muted);line-height:1.5;}
-  .ibox{background:rgba(74,158,255,.04);border:.5px solid rgba(74,158,255,.15);border-radius:8px;padding:12px 14px;margin-bottom:8px;}
-  .iline{font-size:12px;color:#c0cfe0;line-height:1.55;margin-bottom:5px;}
-  .iline.alert{color:var(--orange);}
-  .iline:last-child{margin-bottom:0;}
-  .abox{background:rgba(0,229,160,.04);border:.5px solid rgba(0,229,160,.2);border-radius:8px;padding:12px 14px;}
-  .atitle{font-size:9px;letter-spacing:2px;color:var(--green);text-transform:uppercase;font-family:var(--mono);margin-bottom:8px;}
-  .aline{font-size:12px;color:#b0d5c0;line-height:1.55;margin-bottom:4px;}
-  .aline:last-child{margin-bottom:0;}
-  /* MISC */
   .cmsg{text-align:center;padding:60px 20px;}
   .spin{width:32px;height:32px;border:2px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;}
   @keyframes spin{to{transform:rotate(360deg);}}
   .msgtxt{font-size:13px;color:var(--muted);}
+  .msgtxt2{font-size:11px;color:var(--muted);margin-top:6px;}
   .ebox{background:rgba(255,77,106,.06);border:.5px solid rgba(255,77,106,.25);border-radius:10px;padding:16px;color:var(--red);font-size:13px;line-height:1.7;margin-bottom:10px;}
-  .ebox b{color:#ffaaaa;}
-  .ebox button{margin-top:12px;background:rgba(255,77,106,.15);border:.5px solid rgba(255,77,106,.4);color:var(--red);font-family:var(--sans);font-size:13px;padding:8px 16px;border-radius:6px;cursor:pointer;}
-  .tip-box{background:rgba(74,158,255,.06);border:.5px solid rgba(74,158,255,.2);border-radius:8px;padding:12px 14px;font-size:12px;color:#a0bfe0;line-height:1.6;margin-top:10px;}
-  .tip-box b{color:var(--blue);}
+  .warn-box{background:rgba(245,200,66,.05);border:.5px solid rgba(245,200,66,.2);border-radius:8px;padding:10px 14px;font-size:11px;color:#c8b060;margin-bottom:10px;line-height:1.5;}
+  .last-update{font-size:10px;color:var(--muted);font-family:var(--mono);display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-bottom:10px;}
+  .nbtn{background:var(--surface);border:0.5px solid var(--border2);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:12px;padding:7px 13px;cursor:pointer;transition:background .15s;}
+  .nbtn:hover{background:var(--surface2);}
+  .nbtn.ref{background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.3);color:var(--green);font-size:10px;padding:4px 10px;}
+  .src-list{font-size:10px;color:var(--muted);margin-top:8px;line-height:1.8;}
+  .src-list a{color:var(--blue);text-decoration:none;}
   .footer{text-align:center;padding:14px 0 0;font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.5px;}
-  @media(max-width:400px){.g3{grid-template-columns:1fr 1fr;}.g4{grid-template-columns:1fr 1fr;}.bbar-wrap{display:none;}}
+  @media(max-width:400px){.g3{grid-template-columns:1fr 1fr;}.g4{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -115,17 +84,25 @@
     <div class="clock" id="clock">--:--</div>
   </div>
   <div id="app"></div>
-  <div class="footer">powered by claude · búsqueda web en tiempo real · historial guardado localmente</div>
+  <div class="footer">100% gratuito · fuentes públicas · BCRP · Yahoo Finance · ExchangeRate-API</div>
 </div>
 <script>
-const PFX='ceco_',IDX='ceco_idx';
+// ─────────────────────────────────────────────────────
+// CIERRE ECONÓMICO DIARIO · PERÚ
+// Versión 100% gratuita — sin IA — sin API keys
+// Fuentes: BCRP oficial, Yahoo Finance, Frankfurter,
+//          open.er-api.com (todas públicas y gratis)
+// ─────────────────────────────────────────────────────
+
+const PROXY = 'https://api.allorigins.win/raw?url=';
+const PFX = 'ceco2_', IDX = 'ceco2_idx';
 
 // ── CLOCK
 function pad(n){return String(n).padStart(2,'0');}
 function tick(){const n=new Date(),el=document.getElementById('clock');if(el)el.textContent=pad(n.getHours())+':'+pad(n.getMinutes());}
 setInterval(tick,1000);tick();
 
-// ── STORAGE
+// ── STORAGE (localStorage — historial diario por dispositivo)
 function saveDay(k,d){try{localStorage.setItem(PFX+k,JSON.stringify(d));}catch{}let i=[];try{i=JSON.parse(localStorage.getItem(IDX)||'[]');}catch{}if(!i.includes(k)){i.push(k);i.sort();}try{localStorage.setItem(IDX,JSON.stringify(i));}catch{}}
 function loadDay(k){try{const r=localStorage.getItem(PFX+k);return r?JSON.parse(r):null;}catch{return null;}}
 function allStored(){try{return JSON.parse(localStorage.getItem(IDX)||'[]');}catch{return[];}}
@@ -135,175 +112,325 @@ function delDay(k){try{localStorage.removeItem(PFX+k);}catch{}let i=[];try{i=JSO
 function todayKey(){const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
 function fmtDate(k){if(!k)return'';const[y,m,d]=k.split('-').map(Number);const dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];return dias[new Date(y,m-1,d).getDay()]+' '+d+' de '+meses[m-1]+', '+y;}
 
-// ── DELTA
-function dlt(cur,prv,dec){dec=dec||3;if(prv==null||isNaN(+prv))return'';const d=parseFloat(cur)-parseFloat(prv);const s=d>0?'+':'';const c=d>0?'up':d<0?'dn':'flat';return'<span class="delta '+c+'">'+s+d.toFixed(dec)+'</span>';}
-
-// ── API
-async function callAPI(prompt){
-  const body=JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1400,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]});
-  const headers={'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'};
-  let res;
-  try{
-    res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers,body});
-    if(!res.ok){const t=await res.text();throw new Error('HTTP '+res.status+': '+t.slice(0,200));}
-  }catch(e){
-    // CORS fallback for file:// protocol
-    if(e.message.includes('fetch')||e.message.includes('CORS')||e.message.includes('Failed')){
-      res=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://api.anthropic.com/v1/messages'),{method:'POST',headers:{'Content-Type':'application/json'},body});
-      if(!res.ok)throw new Error('HTTP '+res.status);
-    }else throw e;
-  }
-  const data=await res.json();
-  if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));
-  const text=data.content.filter(b=>b.type==='text').map(b=>b.text).join('\n');
-  let c=text.replace(/```json|```/g,'').trim();
-  const s=c.indexOf('{'),e=c.lastIndexOf('}');
-  if(s>=0&&e>s)c=c.slice(s,e+1);
-  return JSON.parse(c);
-}
-
-async function fetchDay(dateKey){
-  const prompt='Hoy es '+dateKey+'. Busca datos económicos actuales de Perú en fuentes oficiales (BCRP, SUNAT, BVL, LME, COMEX, Osinergmin). Responde SOLO con este JSON sin texto adicional ni markdown:\n{\n  "dolar_sunat_compra": 3.374,\n  "dolar_sunat_venta": 3.387,\n  "dolar_bcrp": 3.395,\n  "bcrp_nota": "fortaleza del sol",\n  "euro_pen": 3.98,\n  "euro_tendencia": "estable",\n  "tasa_bcrp": 4.75,\n  "tasa_bcrp_nota": "sin cambio",\n  "cobre": 5.80,\n  "cobre_badge": "estable",\n  "oro": 4820,\n  "oro_var": "+0.3%",\n  "oro_badge": "fuerte",\n  "plata": 76.50,\n  "plata_badge": "alza",\n  "brent": 96.89,\n  "brent_nota": "sostiene",\n  "lima_gasohol_premium": 23.93,\n  "lima_gasohol_regular": 20.84,\n  "lima_gnv_m3": 1.70,\n  "lima_glp_galon": 9.59,\n  "piura_gasohol_premium": 22.50,\n  "piura_gasohol_regular": 19.80,\n  "piura_gnv_m3": 1.65,\n  "piura_glp_galon": 9.20,\n  "bvl_general": "Cauta",\n  "bvl_general_desc": "descripcion corta",\n  "bvl_minero": "Positivo",\n  "bvl_minero_desc": "descripcion corta",\n  "bvl_top5": [\n    {"ticker":"BUENAVC1","nombre":"Buenaventura","precio":8.20,"cambio_pct":1.8,"sector":"Minero"},\n    {"ticker":"CVERDEC1","nombre":"Cerro Verde","precio":4.50,"cambio_pct":1.5,"sector":"Minero"},\n    {"ticker":"ALICORC1","nombre":"Alicorp","precio":7.80,"cambio_pct":1.2,"sector":"Consumo"},\n    {"ticker":"FERREYC1","nombre":"Ferreycorp","precio":2.10,"cambio_pct":0.9,"sector":"Industrial"},\n    {"ticker":"SCOTIAC1","nombre":"Scotiabank Peru","precio":35.00,"cambio_pct":0.7,"sector":"Financiero"}\n  ],\n  "politico_titulo": "Titulo evento del dia",\n  "politico_desc": "Descripcion breve",\n  "impacto_1": "Impacto 1 para empresas peruanas",\n  "impacto_2": "Impacto 2 relevante",\n  "impacto_alerta": "Alerta importante del dia",\n  "accion_1": "Accion recomendada 1",\n  "accion_2": "Accion recomendada 2"\n}\nPara bvl_top5 usa las 5 acciones con mayor crecimiento solido y sostenido de la BVL hoy. Para combustibles usa precios promedio de Osinergmin diferenciados para Lima y Piura.';
-  const d=await callAPI(prompt);
-  d._date=dateKey;
-  d._fetched=new Date().toISOString();
-  return d;
-}
-
 // ── HELPERS
+function dlt(cur,prv,dec){dec=dec||3;if(prv==null||isNaN(+prv)||isNaN(+cur))return'';const d=parseFloat(cur)-parseFloat(prv);const s=d>0?'+':'';const c=d>0?'up':d<0?'dn':'flat';return'<span class="delta '+c+'">'+s+d.toFixed(dec)+'</span>';}
 function pill(t,c){return'<span class="pill p-'+c+'">'+t+'</span>';}
 
+async function fetchJSON(url){
+  const res = await fetch(url);
+  if(!res.ok) throw new Error('HTTP '+res.status);
+  return res.json();
+}
+async function fetchProxy(url){
+  return fetchJSON(PROXY + encodeURIComponent(url));
+}
+
+// ──────────────────────────────────────────────
+// 1. DÓLAR · BCRP oficial (estadisticas.bcrp.gob.pe)
+// ──────────────────────────────────────────────
+async function getDolarBCRP(){
+  try{
+    // Series BCRP: PD04640PD=compra, PD04641PD=venta (USD/PEN)
+    const url='https://estadisticas.bcrp.gob.pe/estadisticas/series/api/PD04640PD-PD04641PD/json/1/1';
+    const d=await fetchProxy(url);
+    const p=d?.periods;
+    if(p && p.length){
+      const lat=p[p.length-1];
+      return {compra:parseFloat(lat.values[0]).toFixed(3), venta:parseFloat(lat.values[1]).toFixed(3), fuente:'BCRP oficial'};
+    }
+  }catch(e){console.warn('BCRP series falló',e);}
+  // Fallback: open.er-api (gratuito, sin key)
+  try{
+    const d=await fetchJSON('https://open.er-api.com/v6/latest/USD');
+    if(d?.rates?.PEN){
+      const mid=d.rates.PEN;
+      return {compra:(mid-0.015).toFixed(3), venta:(mid+0.015).toFixed(3), fuente:'ExchangeRate-API'};
+    }
+  }catch(e){console.warn('open.er-api falló',e);}
+  return {compra:'—', venta:'—', fuente:'no disponible'};
+}
+
+// ──────────────────────────────────────────────
+// 2. EURO / PEN · Frankfurter (Banco Central Europeo)
+// ──────────────────────────────────────────────
+async function getEuroPEN(){
+  try{
+    const d=await fetchJSON('https://api.frankfurter.app/latest?from=EUR&to=PEN');
+    if(d?.rates?.PEN) return {valor:d.rates.PEN.toFixed(3), fuente:'Frankfurter / BCE'};
+  }catch(e){}
+  try{
+    const d=await fetchJSON('https://open.er-api.com/v6/latest/EUR');
+    if(d?.rates?.PEN) return {valor:d.rates.PEN.toFixed(3), fuente:'ExchangeRate-API'};
+  }catch(e){}
+  return {valor:'—', fuente:'no disponible'};
+}
+
+// ──────────────────────────────────────────────
+// 3. TASA BCRP (valor oficial — actualización mensual)
+// ──────────────────────────────────────────────
+function getTasaBCRP(){
+  // Fuente: https://www.bcrp.gob.pe/politica-monetaria/tasa-de-interes-de-referencia.html
+  // Tasa vigente desde Febrero 2025: 4.75%
+  return {tasa:'4.75', nota:'vigente desde feb 2025 · bcrp.gob.pe'};
+}
+
+// ──────────────────────────────────────────────
+// 4. METALES Y PETRÓLEO · Yahoo Finance (libre, ~15min delay)
+// ──────────────────────────────────────────────
+async function getMetales(){
+  const result={oro:'—',plata:'—',cobre:'—',brent:'—',oro_prev:null,plata_prev:null,cobre_prev:null};
+  try{
+    const sym='GC%3DF%2CSI%3DF%2CHG%3DF%2CBZ%3DF'; // GC=F, SI=F, HG=F, BZ=F
+    const url=`https://query1.finance.yahoo.com/v8/finance/spark?symbols=${sym}&range=2d&interval=1d`;
+    const d=await fetchProxy(url);
+    const spark=d?.spark?.result;
+    if(spark){
+      spark.forEach(item=>{
+        const closes=item.response?.[0]?.indicators?.quote?.[0]?.close;
+        if(!closes||!closes.length) return;
+        const last=closes[closes.length-1];
+        const prev=closes.length>1?closes[closes.length-2]:null;
+        if(item.symbol==='GC=F'){result.oro=last.toFixed(0);result.oro_prev=prev?prev.toFixed(0):null;}
+        if(item.symbol==='SI=F'){result.plata=last.toFixed(2);result.plata_prev=prev?prev.toFixed(2):null;}
+        if(item.symbol==='HG=F'){result.cobre=last.toFixed(3);result.cobre_prev=prev?prev.toFixed(3):null;}
+        if(item.symbol==='BZ=F'){result.brent=last.toFixed(2);}
+      });
+    }
+  }catch(e){console.warn('Yahoo metales falló',e);}
+  return result;
+}
+
+// ──────────────────────────────────────────────
+// 5. BVL · Yahoo Finance (acciones listadas en Lima)
+// ──────────────────────────────────────────────
+async function getBVL(){
+  const tickers=[
+    {sym:'BAP',        nombre:'Credicorp',          sector:'Financiero'},
+    {sym:'CVERDEC1.LM',nombre:'Cerro Verde',         sector:'Minero'},
+    {sym:'BUENAVC1.LM',nombre:'Buenaventura',        sector:'Minero'},
+    {sym:'ALICORC1.LM',nombre:'Alicorp',              sector:'Consumo'},
+    {sym:'FERREYC1.LM',nombre:'Ferreycorp',           sector:'Industrial'},
+    {sym:'VOLCAAC1.LM',nombre:'Volcan Cia Minera',    sector:'Minero'},
+  ];
+  const rows=[];
+  try{
+    const syms=tickers.map(t=>encodeURIComponent(t.sym)).join('%2C');
+    const url=`https://query1.finance.yahoo.com/v8/finance/spark?symbols=${syms}&range=2d&interval=1d`;
+    const d=await fetchProxy(url);
+    const spark=d?.spark?.result;
+    if(spark){
+      spark.forEach(item=>{
+        const closes=item.response?.[0]?.indicators?.quote?.[0]?.close;
+        if(!closes||!closes.length) return;
+        const last=closes[closes.length-1];
+        const prev=closes.length>1?closes[closes.length-2]:null;
+        const chg=prev?((last-prev)/prev*100):0;
+        const meta=tickers.find(t=>t.sym===item.symbol)||{nombre:item.symbol,sector:'—'};
+        rows.push({
+          ticker:item.symbol.replace('.LM',''),
+          nombre:meta.nombre,
+          sector:meta.sector,
+          precio:last.toFixed(2),
+          cambio_pct:chg.toFixed(2)
+        });
+      });
+      rows.sort((a,b)=>parseFloat(b.cambio_pct)-parseFloat(a.cambio_pct));
+    }
+  }catch(e){console.warn('Yahoo BVL falló',e);}
+  return rows.slice(0,5);
+}
+
+// ──────────────────────────────────────────────
+// FETCH COMPLETO DEL DÍA
+// ──────────────────────────────────────────────
+async function fetchDay(dateKey){
+  setLoading('Obteniendo tipo de cambio BCRP…');
+  const dolar=await getDolarBCRP();
+
+  setLoading('Obteniendo Euro/PEN (BCE)…');
+  const euro=await getEuroPEN();
+
+  const tasa=getTasaBCRP();
+
+  setLoading('Obteniendo metales y petróleo (Yahoo Finance)…');
+  const metales=await getMetales();
+
+  setLoading('Obteniendo acciones BVL (Yahoo Finance)…');
+  const bvl=await getBVL();
+
+  return {
+    _date:dateKey,
+    _fetched:new Date().toISOString(),
+    dolar_compra:dolar.compra,
+    dolar_venta:dolar.venta,
+    dolar_fuente:dolar.fuente,
+    euro_pen:euro.valor,
+    euro_fuente:euro.fuente,
+    tasa_bcrp:tasa.tasa,
+    tasa_nota:tasa.nota,
+    oro:metales.oro,
+    oro_prev:metales.oro_prev,
+    plata:metales.plata,
+    plata_prev:metales.plata_prev,
+    cobre:metales.cobre,
+    cobre_prev:metales.cobre_prev,
+    brent:metales.brent,
+    bvl_top5:bvl,
+  };
+}
+
+// ──────────────────────────────────────────────
+// RENDER
+// ──────────────────────────────────────────────
 function renderBvl5(rows){
-  if(!rows||!rows.length)return'<div class="msgtxt" style="padding:8px 0">Sin datos BVL</div>';
-  const max=Math.max(...rows.map(r=>Math.abs(r.cambio_pct||0)))||1;
+  if(!rows||!rows.length)return'<div style="font-size:12px;color:var(--muted);padding:8px 0">Sin datos BVL disponibles en este momento.</div>';
   return'<table class="bvl-table"><thead><tr><th>Acción</th><th>Precio</th><th class="r">Var. %</th></tr></thead><tbody>'+
     rows.map(r=>{
-      const pct=parseFloat(r.cambio_pct)||0;
-      const up=pct>=0;
-      const bw=Math.round(Math.abs(pct)/max*50);
+      const chg=parseFloat(r.cambio_pct)||0;
+      const up=chg>=0;
       return'<tr><td><div class="ticker">'+r.ticker+'</div><div class="bname">'+r.nombre+' · '+r.sector+'</div></td>'+
-        '<td><span class="bprice">S/ '+parseFloat(r.precio||0).toFixed(2)+'</span></td>'+
-        '<td style="text-align:right"><span class="bchg '+(up?'up':'dn')+'">'+(up?'+':'')+pct.toFixed(2)+'%</span>'+
-        '<span class="bbar-wrap"><span class="bbar" style="width:'+bw+'px;background:'+(up?'var(--green)':'var(--red)')+'"></span></span></td></tr>';
+        '<td><span class="bprice">'+r.precio+'</span></td>'+
+        '<td style="text-align:right"><span class="bchg '+(up?'up':'dn')+'">'+(up?'+':'')+chg.toFixed(2)+'%</span></td></tr>';
     }).join('')+'</tbody></table>';
 }
 
-function fuelBlock(pre,label,d,p){
-  return'<div class="fuel-wrap"><div class="fuel-region">📍 '+label+'</div>'+
-    '<div class="g4">'+
-    '<div><div class="mlabel">G. Premium</div><div class="mval sm orange">S/'+d[pre+'gasohol_premium']+dlt(d[pre+'gasohol_premium'],p?p[pre+'gasohol_premium']:null,2)+'</div><div class="msub">por galón</div></div>'+
-    '<div><div class="mlabel">G. Regular</div><div class="mval sm orange">S/'+d[pre+'gasohol_regular']+dlt(d[pre+'gasohol_regular'],p?p[pre+'gasohol_regular']:null,2)+'</div><div class="msub">por galón</div></div>'+
-    '<div><div class="mlabel">GNV</div><div class="mval sm">S/'+d[pre+'gnv_m3']+dlt(d[pre+'gnv_m3'],p?p[pre+'gnv_m3']:null,2)+'</div><div class="msub">por m³</div></div>'+
-    '<div><div class="mlabel">GLP</div><div class="mval sm">S/'+d[pre+'glp_galon']+dlt(d[pre+'glp_galon'],p?p[pre+'glp_galon']:null,2)+'</div><div class="msub">por galón</div></div>'+
-    '</div></div>';
+function renderData(d){
+  const fetched=d._fetched?new Date(d._fetched).toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}):'—';
+  return`
+    <div class="hcard">
+      <div class="eyebrow">Cierre Económico Diario · Perú</div>
+      <div class="hdate">${fmtDate(d._date)}</div>
+      <div class="hmeta">BCRP · Yahoo Finance · Frankfurter · 100% gratuito</div>
+      <span class="hbadge b-live">● EN VIVO</span>
+    </div>
+
+    <div class="last-update">
+      Actualizado: ${fetched}
+      <button class="nbtn ref" onclick="doRefresh()">↻ Actualizar</button>
+    </div>
+
+    <div class="sec">
+      <div class="stitle">Tipo de cambio <span class="src-badge">${d.dolar_fuente||'BCRP'}</span></div>
+      <div class="g3">
+        <div>
+          <div class="mlabel">USD compra</div>
+          <div class="mval sm green">S/ ${d.dolar_compra}</div>
+          <div class="msub">interbancario</div>
+        </div>
+        <div>
+          <div class="mlabel">USD venta</div>
+          <div class="mval sm blue">S/ ${d.dolar_venta}</div>
+          <div class="msub">interbancario</div>
+        </div>
+        <div>
+          <div class="mlabel">EUR / PEN</div>
+          <div class="mval sm">S/ ${d.euro_pen}</div>
+          <div class="msub">${d.euro_fuente||'BCE'}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="stitle">Tasa de interés · BCRP <span class="src-badge">bcrp.gob.pe</span></div>
+      <div class="tasarow">
+        <div class="tasabig">${d.tasa_bcrp}%</div>
+        <div>
+          <div class="mlabel">Tasa de referencia</div>
+          <div class="msub">${d.tasa_nota}</div>
+          ${pill('Banco Central de Reserva del Perú','blue')}
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="stitle">Metales · Futuros <span class="src-badge">Yahoo Finance · ~15min delay</span></div>
+      <div class="g3">
+        <div>
+          <div class="mlabel">Cobre</div>
+          <div class="mval">$${d.cobre}${dlt(d.cobre,d.cobre_prev,3)}</div>
+          <div class="msub">USD / libra · HG=F</div>
+        </div>
+        <div>
+          <div class="mlabel">Oro</div>
+          <div class="mval gold">$${Number(d.oro||0).toLocaleString('es-PE')}${dlt(d.oro,d.oro_prev,0)}</div>
+          <div class="msub">USD / oz troy · GC=F</div>
+        </div>
+        <div>
+          <div class="mlabel">Plata</div>
+          <div class="mval">$${d.plata}${dlt(d.plata,d.plata_prev,2)}</div>
+          <div class="msub">USD / oz troy · SI=F</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:.5px solid var(--border)">
+        <span class="mlabel">Petróleo Brent</span>
+        <span class="mval sm gold" style="margin-left:8px">$${d.brent} USD/bbl</span>
+        <span class="msub" style="display:inline;margin-left:6px">BZ=F · futuros</span>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="stitle">Combustibles · Osinergmin <span class="src-badge">referencial</span></div>
+      <div class="warn-box">
+        ℹ️ Osinergmin no tiene API pública en tiempo real. Los valores son <b>referencias de mercado</b>.
+        Para el precio exacto: <a href="https://www.osinergmin.gob.pe/precios/gasolinas" target="_blank">osinergmin.gob.pe</a>
+      </div>
+      <div class="fuel-wrap">
+        <div class="fuel-region">📍 Lima (referencial)</div>
+        <div class="g4">
+          <div><div class="mlabel">G. Premium</div><div class="mval sm orange">~S/24.0</div><div class="msub">por galón</div></div>
+          <div><div class="mlabel">G. Regular</div><div class="mval sm orange">~S/20.8</div><div class="msub">por galón</div></div>
+          <div><div class="mlabel">GNV</div><div class="mval sm">~S/1.70</div><div class="msub">por m³</div></div>
+          <div><div class="mlabel">GLP</div><div class="mval sm">~S/9.60</div><div class="msub">por galón</div></div>
+        </div>
+      </div>
+      <div class="fuel-wrap" style="margin-bottom:0">
+        <div class="fuel-region">📍 Piura (referencial)</div>
+        <div class="g4">
+          <div><div class="mlabel">G. Premium</div><div class="mval sm orange">~S/22.5</div><div class="msub">por galón</div></div>
+          <div><div class="mlabel">G. Regular</div><div class="mval sm orange">~S/19.8</div><div class="msub">por galón</div></div>
+          <div><div class="mlabel">GNV</div><div class="mval sm">~S/1.65</div><div class="msub">por m³</div></div>
+          <div><div class="mlabel">GLP</div><div class="mval sm">~S/9.20</div><div class="msub">por galón</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="stitle">BVL · Acciones principales <span class="src-badge">Yahoo Finance · ~15min delay</span></div>
+      ${renderBvl5(d.bvl_top5)}
+      <div class="src-list">
+        Datos con ~15 min de retraso · Para tiempo real: <a href="https://www.bvl.com.pe" target="_blank">bvl.com.pe</a>
+      </div>
+    </div>
+  `;
 }
 
-function renderData(d,prev){
-  const p=prev||{};
-  const isToday=d._date===todayKey();
-  return'<div class="hcard"><div class="eyebrow">Cierre Económico Diario · Perú</div><div class="hdate">'+fmtDate(d._date)+'</div><div class="hmeta">BCRP · SUNAT · BVL · LME · COMEX · Osinergmin</div><span class="hbadge '+(isToday?'b-live':'b-old')+'">'+(isToday?'● EN VIVO':'HISTÓRICO')+'</span></div>'+
-
-    '<div class="sec"><div class="stitle">Tipo de cambio</div><div class="g3">'+
-    '<div><div class="mlabel">USD · SUNAT</div><div class="mval sm">S/'+d.dolar_sunat_compra+' / '+d.dolar_sunat_venta+dlt(d.dolar_sunat_venta,p.dolar_sunat_venta,3)+'</div><div class="msub">compra / venta</div></div>'+
-    '<div><div class="mlabel">USD · BCRP</div><div class="mval green">S/'+d.dolar_bcrp+dlt(d.dolar_bcrp,p.dolar_bcrp,3)+'</div><div class="msub">'+(d.bcrp_nota||'interbancario')+'</div></div>'+
-    '<div><div class="mlabel">EUR / PEN</div><div class="mval blue">S/'+d.euro_pen+dlt(d.euro_pen,p.euro_pen,3)+'</div><div class="msub">'+(d.euro_tendencia||'')+'</div></div>'+
-    '</div></div>'+
-
-    '<div class="sec"><div class="stitle">Tasa de interés · BCRP</div><div class="tasarow"><div class="tasabig">'+d.tasa_bcrp+'%'+dlt(d.tasa_bcrp,p.tasa_bcrp,2)+'</div><div><div class="mlabel">Tasa de referencia</div><div class="msub">'+(d.tasa_bcrp_nota||'')+'</div>'+pill('Banco Central de Reserva del Perú','blue')+'</div></div></div>'+
-
-    '<div class="sec"><div class="stitle">Metales · LME / COMEX</div><div class="g3">'+
-    '<div><div class="mlabel">Cobre</div><div class="mval">$'+d.cobre+dlt(d.cobre,p.cobre,2)+'</div><div class="msub">USD / libra</div>'+pill(d.cobre_badge||'','gold')+'</div>'+
-    '<div><div class="mlabel">Oro</div><div class="mval gold">$'+Number(d.oro).toLocaleString('es-PE')+dlt(d.oro,p.oro,0)+'</div><div class="msub">USD / oz troy</div>'+pill((d.oro_var||'')+' '+(d.oro_badge||''),'green')+'</div>'+
-    '<div><div class="mlabel">Plata</div><div class="mval">$'+d.plata+dlt(d.plata,p.plata,2)+'</div><div class="msub">USD / oz troy</div>'+pill(d.plata_badge||'','green')+'</div>'+
-    '</div></div>'+
-
-    '<div class="sec"><div class="stitle">Combustibles · Osinergmin</div>'+
-    fuelBlock('lima_','Lima',d,prev)+
-    fuelBlock('piura_','Piura',d,prev)+
-    '<div style="margin-top:10px;padding-top:10px;border-top:.5px solid var(--border)"><span class="mlabel">Petróleo Brent</span><span class="mval sm gold" style="margin-left:8px">$'+d.brent+' USD/bbl</span><span class="msub" style="display:inline;margin-left:6px">'+(d.brent_nota||'')+'</span></div>'+
-    '</div>'+
-
-    '<div class="sec"><div class="stitle">BVL · Top 5 acciones con mayor crecimiento sólido</div>'+
-    renderBvl5(d.bvl_top5)+
-    '<div class="bvl2">'+
-    '<div><div class="mlabel">Índice General</div><div class="bvlsig caut">'+(d.bvl_general||'—')+'</div><div class="bvldesc">'+(d.bvl_general_desc||'')+'</div></div>'+
-    '<div><div class="mlabel">Sector Minero</div><div class="bvlsig pos">'+(d.bvl_minero||'—')+'</div><div class="bvldesc">'+(d.bvl_minero_desc||'')+'</div></div>'+
-    '</div></div>'+
-
-    '<div class="sec"><div class="stitle">Dato político / coyuntural</div><div class="polbar"><div class="poltitle">'+(d.politico_titulo||'')+'</div><div class="polbody">'+(d.politico_desc||'')+'</div></div></div>'+
-
-    '<div class="sec"><div class="stitle">¿Qué significa esto para tu empresa?</div>'+
-    '<div class="ibox"><div class="iline">'+(d.impacto_1||'')+'</div><div class="iline">'+(d.impacto_2||'')+'</div><div class="iline alert">'+(d.impacto_alerta||'')+'</div></div>'+
-    '<div class="abox"><div class="atitle">Acción recomendada hoy</div><div class="aline">'+(d.accion_1||'')+'</div><div class="aline">'+(d.accion_2||'')+'</div></div>'+
-    '</div>';
-}
-
-// ── STATE
-let days=[],curIdx=-1;
-
+// ──────────────────────────────────────────────
+// ESTADO Y CICLO PRINCIPAL
+// ──────────────────────────────────────────────
 function setHTML(h){document.getElementById('app').innerHTML=h;}
-function loading(m){setHTML('<div class="cmsg"><div class="spin"></div><div class="msgtxt">'+(m||'Cargando...')+'</div></div>');}
-
-function renderShell(body){
-  const dots=days.map((d,i)=>'<div class="hdot '+(i===curIdx?'today':'past')+'" title="'+d+'" onclick="goto('+i+')"></div>').join('');
-  const pOk=curIdx>0,nOk=curIdx<days.length-1;
-  setHTML('<div class="navrow">'+
-    '<button class="nbtn" onclick="goto('+(curIdx-1)+')" '+(pOk?'':'disabled')+'>← Anterior</button>'+
-    '<span class="ncenter">'+(days[curIdx]||'')+'</span>'+
-    '<button class="nbtn" onclick="goto('+(curIdx+1)+')" '+(nOk?'':'disabled')+'>Siguiente →</button>'+
-    '<button class="nbtn ref" onclick="doRefresh()">↻ Actualizar</button>'+
-    '</div>'+
-    '<div class="hrow">'+dots+'<span class="hlabel">'+days.length+' día(s) guardados</span></div>'+
-    body);
-}
-
-function showError(msg){
-  setHTML('<div class="ebox">'+msg+'<br><button onclick="doRefresh()">↻ Reintentar</button></div>'+
-    '<div class="tip-box"><b>¿Ves este error al abrir el archivo localmente?</b><br>'+
-    'La API de Anthropic bloquea llamadas desde <code>file://</code> por seguridad.<br>'+
-    '<b>Solución rápida:</b> Instala la extensión <b>Live Server</b> en VS Code, abre la carpeta y haz clic en "Go Live". '+
-    'O bien, arrastra este archivo a <b>claude.ai</b> como adjunto.</div>');
-}
-
-async function goto(idx){
-  if(idx<0||idx>=days.length)return;
-  curIdx=idx;
-  const d=loadDay(days[idx]);
-  if(!d)return;
-  const prev=idx>0?loadDay(days[idx-1]):null;
-  renderShell(renderData(d,prev));
+function setLoading(m){
+  setHTML('<div class="cmsg"><div class="spin"></div><div class="msgtxt">'+m+'</div><div class="msgtxt2">Consultando fuentes públicas gratuitas…</div></div>');
 }
 
 async function doRefresh(){
-  const today=todayKey();
-  delDay(today);
+  delDay(todayKey());
   await init();
 }
 
 async function init(){
-  loading('Cargando...');
-  try{
-    days=allStored();
-    const today=todayKey();
-    let cached=loadDay(today);
-    if(!cached){
-      loading('Buscando datos en tiempo real (BCRP, BVL, Osinergmin…)');
-      try{
-        cached=await fetchDay(today);
-        saveDay(today,cached);
-      }catch(e){
-        showError('No se pudo obtener los datos del día.<br><b>Error:</b> '+e.message);
-        return;
-      }
+  setLoading('Iniciando…');
+  const today=todayKey();
+  let cached=loadDay(today);
+  if(!cached){
+    try{
+      cached=await fetchDay(today);
+      saveDay(today,cached);
+    }catch(e){
+      setHTML('<div class="ebox"><b>Error al obtener datos:</b><br>'+e.message+'<br><br><button class="nbtn ref" onclick="doRefresh()" style="margin-top:10px">↻ Reintentar</button></div>');
+      return;
     }
-    days=allStored();
-    curIdx=days.indexOf(today);
-    if(curIdx<0&&days.length)curIdx=days.length-1;
-    const prev=curIdx>0?loadDay(days[curIdx-1]):null;
-    renderShell(renderData(cached,prev));
-  }catch(e){
-    showError('Error al inicializar: '+e.message);
   }
+  setHTML(renderData(cached));
 }
 
 init();
