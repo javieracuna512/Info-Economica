@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cierre Económico Diario · Perú</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#080e18;--surface:#0d1623;--surface2:#111d2e;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#e8edf5;--muted:#6b7d96;--green:#00e5a0;--gold:#f5c842;--orange:#ff7b3a;--blue:#4a9eff;--red:#ff4d6a;--purple:#a78bfa;--mono:'Space Mono',monospace;--sans:'DM Sans',sans-serif;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;}
+  .shell{max-width:540px;margin:0 auto;padding:16px 14px 50px;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:0.5px solid var(--border);}
+  .logo{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+  .logo span{color:var(--green);}
+  .clock{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .hcard{background:linear-gradient(135deg,#0f1e35,#0d1623);border:0.5px solid var(--border2);border-radius:14px;padding:18px 20px 16px;margin-bottom:12px;position:relative;overflow:hidden;}
+  .hcard::before{content:'';position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(0,229,160,0.07),transparent 70%);pointer-events:none;}
+  .eyebrow{font-size:9px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;font-family:var(--mono);}
+  .hdate{font-size:24px;font-weight:600;color:var(--text);line-height:1.15;margin-bottom:2px;}
+  .hmeta{font-size:11px;color:var(--muted);margin-top:6px;}
+  .hbadge{display:inline-block;font-size:9px;font-family:var(--mono);letter-spacing:1px;padding:3px 8px;border-radius:4px;margin-top:8px;}
+  .b-live{background:rgba(0,229,160,0.12);color:var(--green);}
+  .b-old{background:rgba(107,125,150,0.15);color:var(--muted);}
+  .navrow{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
+  .nbtn{background:var(--surface);border:0.5px solid var(--border2);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:12px;padding:7px 13px;cursor:pointer;transition:background .15s;}
+  .nbtn:hover:not(:disabled){background:var(--surface2);}
+  .nbtn:disabled{opacity:.3;cursor:default;}
+  .nbtn.ref{background:rgba(0,229,160,0.1);border-color:rgba(0,229,160,0.3);color:var(--green);margin-left:auto;}
+  .nbtn.ref:hover{background:rgba(0,229,160,0.18);}
+  .ncenter{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .hrow{display:flex;gap:5px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
+  .hdot{width:9px;height:9px;border-radius:50%;background:var(--surface2);border:0.5px solid var(--border2);cursor:pointer;transition:transform .1s;}
+  .hdot:hover{transform:scale(1.3);}
+  .hdot.today{background:var(--green);border-color:var(--green);}
+  .hdot.past{background:var(--blue);border-color:var(--blue);opacity:.7;}
+  .hlabel{font-size:10px;color:var(--muted);font-family:var(--mono);margin-left:4px;}
+  .sec{background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+  .stitle{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:var(--mono);margin-bottom:12px;}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;}
+  .mlabel{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:var(--mono);}
+  .mval{font-family:var(--mono);font-size:20px;font-weight:700;line-height:1.1;color:var(--text);}
+  .mval.sm{font-size:15px;}
+  .mval.green{color:var(--green);}
+  .mval.gold{color:var(--gold);}
+  .mval.orange{color:var(--orange);}
+  .mval.blue{color:var(--blue);}
+  .msub{font-size:10px;color:var(--muted);margin-top:3px;}
+  .pill{display:inline-block;font-size:9px;font-family:var(--mono);letter-spacing:.5px;padding:2px 7px;border-radius:3px;margin-top:5px;}
+  .p-green{background:rgba(0,229,160,.1);color:var(--green);}
+  .p-gold{background:rgba(245,200,66,.1);color:var(--gold);}
+  .p-orange{background:rgba(255,123,58,.1);color:var(--orange);}
+  .p-blue{background:rgba(74,158,255,.1);color:var(--blue);}
+  .p-muted{background:rgba(107,125,150,.12);color:var(--muted);}
+  .delta{font-size:11px;font-family:var(--mono);margin-left:5px;}
+  .up{color:var(--green);}
+  .dn{color:var(--red);}
+  .flat{color:var(--muted);}
+  .tasarow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .tasabig{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--blue);}
+  /* BVL TABLE */
+  .bvl-table{width:100%;border-collapse:collapse;font-size:12px;}
+  .bvl-table th{font-size:9px;font-family:var(--mono);letter-spacing:1px;color:var(--muted);text-transform:uppercase;text-align:left;padding:0 6px 8px;border-bottom:0.5px solid var(--border2);}
+  .bvl-table th.r{text-align:right;}
+  .bvl-table td{padding:8px 6px;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:middle;}
+  .bvl-table tr:last-child td{border-bottom:none;}
+  .ticker{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--gold);}
+  .bname{font-size:10px;color:var(--muted);margin-top:1px;}
+  .bprice{font-family:var(--mono);font-size:13px;font-weight:700;}
+  .bchg{font-family:var(--mono);font-size:12px;font-weight:700;}
+  .bchg.up{color:var(--green);}
+  .bchg.dn{color:var(--red);}
+  .bbar-wrap{width:50px;height:4px;background:var(--surface2);border-radius:2px;display:inline-block;vertical-align:middle;margin-left:6px;}
+  .bbar{height:4px;border-radius:2px;}
+  .bvl2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;padding-top:12px;border-top:.5px solid var(--border);}
+  .bvlsig{font-size:22px;font-weight:600;margin:4px 0;}
+  .bvlsig.pos{color:var(--gold);}
+  .bvlsig.caut{color:var(--purple);}
+  .bvldesc{font-size:11px;color:var(--muted);line-height:1.4;}
+  /* FUEL */
+  .fuel-wrap{margin-bottom:12px;}
+  .fuel-region{font-size:9px;letter-spacing:1.5px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;margin-bottom:10px;padding:3px 8px;background:rgba(255,255,255,.03);border-radius:4px;display:inline-block;}
+  /* POL / IMPACT / ACTION */
+  .polbar{border-left:2px solid var(--orange);padding-left:12px;}
+  .poltitle{font-size:13px;color:var(--orange);font-weight:500;margin-bottom:4px;}
+  .polbody{font-size:12px;color:var(--muted);line-height:1.5;}
+  .ibox{background:rgba(74,158,255,.04);border:.5px solid rgba(74,158,255,.15);border-radius:8px;padding:12px 14px;margin-bottom:8px;}
+  .iline{font-size:12px;color:#c0cfe0;line-height:1.55;margin-bottom:5px;}
+  .iline.alert{color:var(--orange);}
+  .iline:last-child{margin-bottom:0;}
+  .abox{background:rgba(0,229,160,.04);border:.5px solid rgba(0,229,160,.2);border-radius:8px;padding:12px 14px;}
+  .atitle{font-size:9px;letter-spacing:2px;color:var(--green);text-transform:uppercase;font-family:var(--mono);margin-bottom:8px;}
+  .aline{font-size:12px;color:#b0d5c0;line-height:1.55;margin-bottom:4px;}
+  .aline:last-child{margin-bottom:0;}
+  /* MISC */
+  .cmsg{text-align:center;padding:60px 20px;}
+  .spin{width:32px;height:32px;border:2px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .msgtxt{font-size:13px;color:var(--muted);}
+  .ebox{background:rgba(255,77,106,.06);border:.5px solid rgba(255,77,106,.25);border-radius:10px;padding:16px;color:var(--red);font-size:13px;line-height:1.7;margin-bottom:10px;}
+  .ebox b{color:#ffaaaa;}
+  .ebox button{margin-top:12px;background:rgba(255,77,106,.15);border:.5px solid rgba(255,77,106,.4);color:var(--red);font-family:var(--sans);font-size:13px;padding:8px 16px;border-radius:6px;cursor:pointer;}
+  .tip-box{background:rgba(74,158,255,.06);border:.5px solid rgba(74,158,255,.2);border-radius:8px;padding:12px 14px;font-size:12px;color:#a0bfe0;line-height:1.6;margin-top:10px;}
+  .tip-box b{color:var(--blue);}
+  .footer{text-align:center;padding:14px 0 0;font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.5px;}
+  @media(max-width:400px){.g3{grid-template-columns:1fr 1fr;}.g4{grid-template-columns:1fr 1fr;}.bbar-wrap{display:none;}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div class="logo">CIERRE ECO · <span>PERÚ</span></div>
+    <div class="clock" id="clock">--:--</div>
+  </div>
+  <div id="app"></div>
+  <div class="footer">powered by claude · búsqueda web en tiempo real · historial guardado localmente</div>
+</div>
+<script>
+const PFX='ceco_',IDX='ceco_idx';
+
+// ── CLOCK
+function pad(n){return String(n).padStart(2,'0');}
+function tick(){const n=new Date(),el=document.getElementById('clock');if(el)el.textContent=pad(n.getHours())+':'+pad(n.getMinutes());}
+setInterval(tick,1000);tick();
+
+// ── STORAGE
+function saveDay(k,d){try{localStorage.setItem(PFX+k,JSON.stringify(d));}catch{}let i=[];try{i=JSON.parse(localStorage.getItem(IDX)||'[]');}catch{}if(!i.includes(k)){i.push(k);i.sort();}try{localStorage.setItem(IDX,JSON.stringify(i));}catch{}}
+function loadDay(k){try{const r=localStorage.getItem(PFX+k);return r?JSON.parse(r):null;}catch{return null;}}
+function allStored(){try{return JSON.parse(localStorage.getItem(IDX)||'[]');}catch{return[];}}
+function delDay(k){try{localStorage.removeItem(PFX+k);}catch{}let i=[];try{i=JSON.parse(localStorage.getItem(IDX)||'[]');}catch{}i=i.filter(x=>x!==k);try{localStorage.setItem(IDX,JSON.stringify(i));}catch{}}
+
+// ── DATE
+function todayKey(){const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function fmtDate(k){if(!k)return'';const[y,m,d]=k.split('-').map(Number);const dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];return dias[new Date(y,m-1,d).getDay()]+' '+d+' de '+meses[m-1]+', '+y;}
+
+// ── DELTA
+function dlt(cur,prv,dec){dec=dec||3;if(prv==null||isNaN(+prv))return'';const d=parseFloat(cur)-parseFloat(prv);const s=d>0?'+':'';const c=d>0?'up':d<0?'dn':'flat';return'<span class="delta '+c+'">'+s+d.toFixed(dec)+'</span>';}
+
+// ── API
+async function callAPI(prompt){
+  const body=JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1400,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]});
+  const headers={'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'};
+  let res;
+  try{
+    res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers,body});
+    if(!res.ok){const t=await res.text();throw new Error('HTTP '+res.status+': '+t.slice(0,200));}
+  }catch(e){
+    // CORS fallback for file:// protocol
+    if(e.message.includes('fetch')||e.message.includes('CORS')||e.message.includes('Failed')){
+      res=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://api.anthropic.com/v1/messages'),{method:'POST',headers:{'Content-Type':'application/json'},body});
+      if(!res.ok)throw new Error('HTTP '+res.status);
+    }else throw e;
+  }
+  const data=await res.json();
+  if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));
+  const text=data.content.filter(b=>b.type==='text').map(b=>b.text).join('\n');
+  let c=text.replace(/```json|```/g,'').trim();
+  const s=c.indexOf('{'),e=c.lastIndexOf('}');
+  if(s>=0&&e>s)c=c.slice(s,e+1);
+  return JSON.parse(c);
+}
+
+async function fetchDay(dateKey){
+  const prompt='Hoy es '+dateKey+'. Busca datos económicos actuales de Perú en fuentes oficiales (BCRP, SUNAT, BVL, LME, COMEX, Osinergmin). Responde SOLO con este JSON sin texto adicional ni markdown:\n{\n  "dolar_sunat_compra": 3.374,\n  "dolar_sunat_venta": 3.387,\n  "dolar_bcrp": 3.395,\n  "bcrp_nota": "fortaleza del sol",\n  "euro_pen": 3.98,\n  "euro_tendencia": "estable",\n  "tasa_bcrp": 4.75,\n  "tasa_bcrp_nota": "sin cambio",\n  "cobre": 5.80,\n  "cobre_badge": "estable",\n  "oro": 4820,\n  "oro_var": "+0.3%",\n  "oro_badge": "fuerte",\n  "plata": 76.50,\n  "plata_badge": "alza",\n  "brent": 96.89,\n  "brent_nota": "sostiene",\n  "lima_gasohol_premium": 23.93,\n  "lima_gasohol_regular": 20.84,\n  "lima_gnv_m3": 1.70,\n  "lima_glp_galon": 9.59,\n  "piura_gasohol_premium": 22.50,\n  "piura_gasohol_regular": 19.80,\n  "piura_gnv_m3": 1.65,\n  "piura_glp_galon": 9.20,\n  "bvl_general": "Cauta",\n  "bvl_general_desc": "descripcion corta",\n  "bvl_minero": "Positivo",\n  "bvl_minero_desc": "descripcion corta",\n  "bvl_top5": [\n    {"ticker":"BUENAVC1","nombre":"Buenaventura","precio":8.20,"cambio_pct":1.8,"sector":"Minero"},\n    {"ticker":"CVERDEC1","nombre":"Cerro Verde","precio":4.50,"cambio_pct":1.5,"sector":"Minero"},\n    {"ticker":"ALICORC1","nombre":"Alicorp","precio":7.80,"cambio_pct":1.2,"sector":"Consumo"},\n    {"ticker":"FERREYC1","nombre":"Ferreycorp","precio":2.10,"cambio_pct":0.9,"sector":"Industrial"},\n    {"ticker":"SCOTIAC1","nombre":"Scotiabank Peru","precio":35.00,"cambio_pct":0.7,"sector":"Financiero"}\n  ],\n  "politico_titulo": "Titulo evento del dia",\n  "politico_desc": "Descripcion breve",\n  "impacto_1": "Impacto 1 para empresas peruanas",\n  "impacto_2": "Impacto 2 relevante",\n  "impacto_alerta": "Alerta importante del dia",\n  "accion_1": "Accion recomendada 1",\n  "accion_2": "Accion recomendada 2"\n}\nPara bvl_top5 usa las 5 acciones con mayor crecimiento solido y sostenido de la BVL hoy. Para combustibles usa precios promedio de Osinergmin diferenciados para Lima y Piura.';
+  const d=await callAPI(prompt);
+  d._date=dateKey;
+  d._fetched=new Date().toISOString();
+  return d;
+}
+
+// ── HELPERS
+function pill(t,c){return'<span class="pill p-'+c+'">'+t+'</span>';}
+
+function renderBvl5(rows){
+  if(!rows||!rows.length)return'<div class="msgtxt" style="padding:8px 0">Sin datos BVL</div>';
+  const max=Math.max(...rows.map(r=>Math.abs(r.cambio_pct||0)))||1;
+  return'<table class="bvl-table"><thead><tr><th>Acción</th><th>Precio</th><th class="r">Var. %</th></tr></thead><tbody>'+
+    rows.map(r=>{
+      const pct=parseFloat(r.cambio_pct)||0;
+      const up=pct>=0;
+      const bw=Math.round(Math.abs(pct)/max*50);
+      return'<tr><td><div class="ticker">'+r.ticker+'</div><div class="bname">'+r.nombre+' · '+r.sector+'</div></td>'+
+        '<td><span class="bprice">S/ '+parseFloat(r.precio||0).toFixed(2)+'</span></td>'+
+        '<td style="text-align:right"><span class="bchg '+(up?'up':'dn')+'">'+(up?'+':'')+pct.toFixed(2)+'%</span>'+
+        '<span class="bbar-wrap"><span class="bbar" style="width:'+bw+'px;background:'+(up?'var(--green)':'var(--red)')+'"></span></span></td></tr>';
+    }).join('')+'</tbody></table>';
+}
+
+function fuelBlock(pre,label,d,p){
+  return'<div class="fuel-wrap"><div class="fuel-region">📍 '+label+'</div>'+
+    '<div class="g4">'+
+    '<div><div class="mlabel">G. Premium</div><div class="mval sm orange">S/'+d[pre+'gasohol_premium']+dlt(d[pre+'gasohol_premium'],p?p[pre+'gasohol_premium']:null,2)+'</div><div class="msub">por galón</div></div>'+
+    '<div><div class="mlabel">G. Regular</div><div class="mval sm orange">S/'+d[pre+'gasohol_regular']+dlt(d[pre+'gasohol_regular'],p?p[pre+'gasohol_regular']:null,2)+'</div><div class="msub">por galón</div></div>'+
+    '<div><div class="mlabel">GNV</div><div class="mval sm">S/'+d[pre+'gnv_m3']+dlt(d[pre+'gnv_m3'],p?p[pre+'gnv_m3']:null,2)+'</div><div class="msub">por m³</div></div>'+
+    '<div><div class="mlabel">GLP</div><div class="mval sm">S/'+d[pre+'glp_galon']+dlt(d[pre+'glp_galon'],p?p[pre+'glp_galon']:null,2)+'</div><div class="msub">por galón</div></div>'+
+    '</div></div>';
+}
+
+function renderData(d,prev){
+  const p=prev||{};
+  const isToday=d._date===todayKey();
+  return'<div class="hcard"><div class="eyebrow">Cierre Económico Diario · Perú</div><div class="hdate">'+fmtDate(d._date)+'</div><div class="hmeta">BCRP · SUNAT · BVL · LME · COMEX · Osinergmin</div><span class="hbadge '+(isToday?'b-live':'b-old')+'">'+(isToday?'● EN VIVO':'HISTÓRICO')+'</span></div>'+
+
+    '<div class="sec"><div class="stitle">Tipo de cambio</div><div class="g3">'+
+    '<div><div class="mlabel">USD · SUNAT</div><div class="mval sm">S/'+d.dolar_sunat_compra+' / '+d.dolar_sunat_venta+dlt(d.dolar_sunat_venta,p.dolar_sunat_venta,3)+'</div><div class="msub">compra / venta</div></div>'+
+    '<div><div class="mlabel">USD · BCRP</div><div class="mval green">S/'+d.dolar_bcrp+dlt(d.dolar_bcrp,p.dolar_bcrp,3)+'</div><div class="msub">'+(d.bcrp_nota||'interbancario')+'</div></div>'+
+    '<div><div class="mlabel">EUR / PEN</div><div class="mval blue">S/'+d.euro_pen+dlt(d.euro_pen,p.euro_pen,3)+'</div><div class="msub">'+(d.euro_tendencia||'')+'</div></div>'+
+    '</div></div>'+
+
+    '<div class="sec"><div class="stitle">Tasa de interés · BCRP</div><div class="tasarow"><div class="tasabig">'+d.tasa_bcrp+'%'+dlt(d.tasa_bcrp,p.tasa_bcrp,2)+'</div><div><div class="mlabel">Tasa de referencia</div><div class="msub">'+(d.tasa_bcrp_nota||'')+'</div>'+pill('Banco Central de Reserva del Perú','blue')+'</div></div></div>'+
+
+    '<div class="sec"><div class="stitle">Metales · LME / COMEX</div><div class="g3">'+
+    '<div><div class="mlabel">Cobre</div><div class="mval">$'+d.cobre+dlt(d.cobre,p.cobre,2)+'</div><div class="msub">USD / libra</div>'+pill(d.cobre_badge||'','gold')+'</div>'+
+    '<div><div class="mlabel">Oro</div><div class="mval gold">$'+Number(d.oro).toLocaleString('es-PE')+dlt(d.oro,p.oro,0)+'</div><div class="msub">USD / oz troy</div>'+pill((d.oro_var||'')+' '+(d.oro_badge||''),'green')+'</div>'+
+    '<div><div class="mlabel">Plata</div><div class="mval">$'+d.plata+dlt(d.plata,p.plata,2)+'</div><div class="msub">USD / oz troy</div>'+pill(d.plata_badge||'','green')+'</div>'+
+    '</div></div>'+
+
+    '<div class="sec"><div class="stitle">Combustibles · Osinergmin</div>'+
+    fuelBlock('lima_','Lima',d,prev)+
+    fuelBlock('piura_','Piura',d,prev)+
+    '<div style="margin-top:10px;padding-top:10px;border-top:.5px solid var(--border)"><span class="mlabel">Petróleo Brent</span><span class="mval sm gold" style="margin-left:8px">$'+d.brent+' USD/bbl</span><span class="msub" style="display:inline;margin-left:6px">'+(d.brent_nota||'')+'</span></div>'+
+    '</div>'+
+
+    '<div class="sec"><div class="stitle">BVL · Top 5 acciones con mayor crecimiento sólido</div>'+
+    renderBvl5(d.bvl_top5)+
+    '<div class="bvl2">'+
+    '<div><div class="mlabel">Índice General</div><div class="bvlsig caut">'+(d.bvl_general||'—')+'</div><div class="bvldesc">'+(d.bvl_general_desc||'')+'</div></div>'+
+    '<div><div class="mlabel">Sector Minero</div><div class="bvlsig pos">'+(d.bvl_minero||'—')+'</div><div class="bvldesc">'+(d.bvl_minero_desc||'')+'</div></div>'+
+    '</div></div>'+
+
+    '<div class="sec"><div class="stitle">Dato político / coyuntural</div><div class="polbar"><div class="poltitle">'+(d.politico_titulo||'')+'</div><div class="polbody">'+(d.politico_desc||'')+'</div></div></div>'+
+
+    '<div class="sec"><div class="stitle">¿Qué significa esto para tu empresa?</div>'+
+    '<div class="ibox"><div class="iline">'+(d.impacto_1||'')+'</div><div class="iline">'+(d.impacto_2||'')+'</div><div class="iline alert">'+(d.impacto_alerta||'')+'</div></div>'+
+    '<div class="abox"><div class="atitle">Acción recomendada hoy</div><div class="aline">'+(d.accion_1||'')+'</div><div class="aline">'+(d.accion_2||'')+'</div></div>'+
+    '</div>';
+}
+
+// ── STATE
+let days=[],curIdx=-1;
+
+function setHTML(h){document.getElementById('app').innerHTML=h;}
+function loading(m){setHTML('<div class="cmsg"><div class="spin"></div><div class="msgtxt">'+(m||'Cargando...')+'</div></div>');}
+
+function renderShell(body){
+  const dots=days.map((d,i)=>'<div class="hdot '+(i===curIdx?'today':'past')+'" title="'+d+'" onclick="goto('+i+')"></div>').join('');
+  const pOk=curIdx>0,nOk=curIdx<days.length-1;
+  setHTML('<div class="navrow">'+
+    '<button class="nbtn" onclick="goto('+(curIdx-1)+')" '+(pOk?'':'disabled')+'>← Anterior</button>'+
+    '<span class="ncenter">'+(days[curIdx]||'')+'</span>'+
+    '<button class="nbtn" onclick="goto('+(curIdx+1)+')" '+(nOk?'':'disabled')+'>Siguiente →</button>'+
+    '<button class="nbtn ref" onclick="doRefresh()">↻ Actualizar</button>'+
+    '</div>'+
+    '<div class="hrow">'+dots+'<span class="hlabel">'+days.length+' día(s) guardados</span></div>'+
+    body);
+}
+
+function showError(msg){
+  setHTML('<div class="ebox">'+msg+'<br><button onclick="doRefresh()">↻ Reintentar</button></div>'+
+    '<div class="tip-box"><b>¿Ves este error al abrir el archivo localmente?</b><br>'+
+    'La API de Anthropic bloquea llamadas desde <code>file://</code> por seguridad.<br>'+
+    '<b>Solución rápida:</b> Instala la extensión <b>Live Server</b> en VS Code, abre la carpeta y haz clic en "Go Live". '+
+    'O bien, arrastra este archivo a <b>claude.ai</b> como adjunto.</div>');
+}
+
+async function goto(idx){
+  if(idx<0||idx>=days.length)return;
+  curIdx=idx;
+  const d=loadDay(days[idx]);
+  if(!d)return;
+  const prev=idx>0?loadDay(days[idx-1]):null;
+  renderShell(renderData(d,prev));
+}
+
+async function doRefresh(){
+  const today=todayKey();
+  delDay(today);
+  await init();
+}
+
+async function init(){
+  loading('Cargando...');
+  try{
+    days=allStored();
+    const today=todayKey();
+    let cached=loadDay(today);
+    if(!cached){
+      loading('Buscando datos en tiempo real (BCRP, BVL, Osinergmin…)');
+      try{
+        cached=await fetchDay(today);
+        saveDay(today,cached);
+      }catch(e){
+        showError('No se pudo obtener los datos del día.<br><b>Error:</b> '+e.message);
+        return;
+      }
+    }
+    days=allStored();
+    curIdx=days.indexOf(today);
+    if(curIdx<0&&days.length)curIdx=days.length-1;
+    const prev=curIdx>0?loadDay(days[curIdx-1]):null;
+    renderShell(renderData(cached,prev));
+  }catch(e){
+    showError('Error al inicializar: '+e.message);
+  }
+}
+
+init();
+</script>
+</body>
+</html>
